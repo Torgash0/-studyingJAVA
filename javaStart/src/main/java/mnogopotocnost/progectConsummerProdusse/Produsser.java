@@ -1,4 +1,4 @@
-package mnogopotocnost.progect;
+package mnogopotocnost.progectConsummerProdusse;
 
 public class Produsser  implements  Runnable{
     private Store store;

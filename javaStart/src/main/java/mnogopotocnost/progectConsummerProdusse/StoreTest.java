@@ -1,4 +1,4 @@
-package mnogopotocnost.progect;
+package mnogopotocnost.progectConsummerProdusse;
 
 public class StoreTest {
     public static void main(String[] args) {

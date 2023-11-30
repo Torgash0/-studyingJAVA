@@ -1,4 +1,4 @@
-package mnogopotocnost.progect;
+package mnogopotocnost.progectConsummerProdusse;
 
 public class Store {
     private int item;

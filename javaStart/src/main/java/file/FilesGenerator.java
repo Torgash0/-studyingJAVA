@@ -1,8 +1,10 @@
 package file;
 
 import javax.annotation.processing.Filer;
+import javax.swing.text.html.HTMLDocument;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class FilesGenerator {

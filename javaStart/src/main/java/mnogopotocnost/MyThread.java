@@ -2,8 +2,8 @@
 package mnogopotocnost;
 
 public class MyThread implements Runnable {
-    private int counter;
-    private static int globalcounter;
+    private int counter = 0;
+    private static int globalcounter = 0;
 
     @Override
     public void run() {
@@ -15,7 +15,7 @@ public class MyThread implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println(Thread.currentThread().getName() + "+++" + counter + " ----" + globalcounter);
+            System.out.println(Thread.currentThread().getName() + " +++ " + counter + " ---- " + globalcounter);
         }
 
     }
