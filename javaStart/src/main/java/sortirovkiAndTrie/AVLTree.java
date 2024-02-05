@@ -1,7 +1,5 @@
 package sortirovkiAndTrie;
 
-import generic.A;
-
 public class AVLTree {
     int key;
     int value;

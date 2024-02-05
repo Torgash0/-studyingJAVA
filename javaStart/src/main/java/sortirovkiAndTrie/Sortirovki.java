@@ -4,16 +4,19 @@ import java.util.Scanner;
 
 public class Sortirovki {
     public static void main(String[] args) {
-        int[] arr = new int[5];
-        Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = sc.nextInt();
-        }
-        bubleSort(arr);
+//        int[] arr = new int[5];
+//        Scanner sc = new Scanner(System.in);
+//        for (int i = 0; i < arr.length; i++) {
+//            arr[i] = sc.nextInt();
+//        }
+//        bubleSort(arr);
+//        viborSort(arr);
+//        vstakaSort(arr);
+//        fastHoaraSort(arr);
+//        lamutoSort(arr);
+        int[] arr = new int[]{1,2,5,50,100};
         viborSort(arr);
-        vstakaSort(arr);
-        fastHoaraSort(arr);
-        lamutoSort(arr);
+//        System.out.println(binarySearch(50, array));
 
     }
 
@@ -54,7 +57,10 @@ public class Sortirovki {
                 arr[i] = temp;
             }
         }
+        System.out.println(arr);
     }
+
+
 
 
     //сортировка вставкой
@@ -127,4 +133,28 @@ public class Sortirovki {
 
         lamutoSort(arr, 0, arr.length - 1);
     }
+
+
+
+
+
+//бинарная сортировка
+    static int binarySearch(int value, int[] array) {
+        int lowIndex = 0;
+        int hightIndex = array.length - 1;
+        while (lowIndex <= hightIndex) {
+            int middleIndex = (lowIndex + hightIndex) / 2;
+            if (array[middleIndex] == value) {
+                return middleIndex;
+            }
+            if (array[middleIndex] >  value) {
+                hightIndex = middleIndex - 1;
+            }
+            if (array[middleIndex] < value) {
+                lowIndex = middleIndex + 1;
+            }
+        }
+        return -1;
+    }
+
 }

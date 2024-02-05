@@ -1,0 +1,98 @@
+это все альтернативо синхронайзт
+lock() -ожидает пока не будет получена блокировка
+tryLock() - ожидает получения блокировки, если получена то тру , если не получена то фалс, в отличии от lock, не ожидасет
+получкния блокировки если она не доступна
+unLock() - снимает блокировку
+
+ReentrantLock - это класс в Java, который предоставляет возможность синхронизации потоков с помощью блокировки. Он поддерживает рекурсивную блокировку, что означает, что один и тот же поток может многократно захватывать блокировку, не вызывая взаимоблокировки.
+
+Пример использования:
+
+import java.util.concurrent.locks.ReentrantLock;
+
+public class MyThread implements Runnable {
+    private ReentrantLock lock = new ReentrantLock();
+
+    public void run() {
+        lock.lock();
+        try {
+            // выполнение задачи
+        } finally {
+            lock.unlock();
+        }
+    }
+}
+
+Часто используемые функции для ReentrantLock:
+
+1. lock(): захватывает блокировку.
+
+ReentrantLock lock = new ReentrantLock();
+lock.lock();
+// выполнение задачи
+lock.unlock();
+
+2. unlock(): освобождает блокировку.
+
+ReentrantLock lock = new ReentrantLock();
+lock.lock();
+// выполнение задачи
+lock.unlock();
+
+3. tryLock(): пытается захватить блокировку, возвращает true, если удалось захватить, и false, если нет.
+
+ReentrantLock lock = new ReentrantLock();
+if (lock.tryLock()) {
+    // выполнение задачи
+    lock.unlock();
+} else {
+    // обработка случая, когда блокировка не была захвачена
+}
+
+4. tryLock(long timeout, TimeUnit unit): пытается захватить блокировку в течение заданного времени, возвращает true, если удалось захватить, и false, если нет.
+
+ReentrantLock lock = new ReentrantLock();
+try {
+    if (lock.tryLock(1, TimeUnit.SECONDS)) {
+        // выполнение задачи
+        lock.unlock();
+    } else {
+        // обработка случая, когда блокировка не была захвачена в течение 1 секунды
+    }
+} catch (InterruptedException e) {
+    e.printStackTrace();
+}
+
+5. isLocked(): возвращает true, если блокировка захвачена.
+
+ReentrantLock lock = new ReentrantLock();
+if (lock.isLocked()) {
+    // обработка случая, когда блокировка уже захвачена
+} else {
+    lock.lock();
+    // выполнение задачи
+    lock.unlock();
+}
+
+6. getHoldCount(): возвращает количество раз, которое блокировка была захвачена текущим потоком.
+
+ReentrantLock lock = new ReentrantLock();
+lock.lock();
+System.out.println("Hold count: " + lock.getHoldCount()); // выводит "Hold count: 1"
+lock.lock();
+System.out.println("Hold count: " + lock.getHoldCount()); // выводит "Hold count: 2"
+lock.unlock();
+lock.unlock();
+
+7. getQueueLength(): возвращает количество потоков, ожидающих захвата блокировки.
+
+ReentrantLock lock = new ReentrantLock();
+lock.lock();
+System.out.println("Queue length: " + lock.getQueueLength()); // выводит "Queue length: 0"
+lock.lock();
+System.out.println("Queue length: " + lock.getQueueLength()); // выводит "Queue length: 1"
+lock.unlock();
+lock.unlock();
+
+
+

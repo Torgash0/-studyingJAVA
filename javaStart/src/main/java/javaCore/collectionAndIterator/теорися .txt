@@ -1,0 +1,277 @@
+list хранит эелемнты в порядке их жобавления
+queue хранит элементы в пордяке лучшем для их реализации
+set множества уникальных обьектов (двух обьектов одинаковых не может быть)
+(не входитт в интерфейс коллектион) map хранит обьекты ввиде ключ значения
+
+List работает по принципу массива , хранит в порядке добавления
+ArrayList<E> - на базе массива ( часто используется)
+плюсы : быстрый поиск по индексу, быстрая вставка и удаление с конца
+минусы : медленная вставка и удлаение элементов
+используется когда важно читать/писать , но не добавлять/удалять 
+LinkedList<E> на базе двухсвязного списка  ( часто используется)
+реализован ввиде двухсвзяннаого списка, элементы хранят ссылки на предыдущий и на следющий элемент
+плюсы : быстрое доавбление и удаление элементов
+минусы : медленный доступ по индексу
+используется когд нужно меого добавлять/удалять . но не чиать и писать по середине
+Vector<E> - вектор
+Stack<E> - стек
+
+
+set<E> это коллекция без повторяющихся элементов
+
+HashSet<E> - не упорядоченное множество на основе хеш кода
+самый быстрый , давет константное вреся для add() добавить, remove() удалить, cintains() найти/содержеться такой
+элемент,size() размер
+порядка не гарантирует ( при каждом запуске может меняться)
+КОГДА ВАЖНА СКОРОСТЬ
+
+TreeSet<E> - упорядоченное множество , элементы которого отсортированы в порядке возрастания
+время базовых операций дольше - log(n)
+гарантирует порядок элементов ( соритирует)
+не предоставляет каких либо параментров для настройки
+предоставляет дополнительные методы для списка : first(), last(), headSet(), tailSet()
+ИСПОЛЬЗОВАТЬ КОГДА ВАЖНА СОРТИРОВКА , скорость зависит от размера
+КРАСНО-БЕЛЫЕ ДЕРЕВЬЯ
+
+LinkedHashSet<E> - упордоченный HashSet, эдементы храняться в порядке добавления
+расширяет HashSet
+список элементов упорядоченный
+ИСПОЛЬЗУЕТСЯ КОГДА ВАЖЕН ПОРЯДОК , А НЕ СКОРОСТЬ
+
+Queue<E> - очередь (хранилеще элементов для обработки) (new LinkedList)
+свойства: FirstIn - FirstOut, может быть ограниченный размер
+
+Deque<E> extends Queue<E> - двунаправленная очередь
+стек или LiFo
+
+
+ВАЖНО ОЧЕНЬ!!!!!!!
+Iterator -  предназначен для обхода коллекций
+методы:
+hasNext() - определяет есть ли следующий элемент
+next() - берет текующий элемент и переносит курсор на следующий элемент
+remove() - удаляет элемент
+
+
+https://drive.google.com/file/d/1ORQjoW8sR4hhCcTZU2RmFHu9SvkmSP9z/view
+
+
+
+
+Collection: базовый интерфейс для всех коллекций и других интерфейсов коллекций
+
+Queue: наследует интерфейс Collection и представляет функционал для структур данных в виде очереди
+
+Deque: наследует интерфейс Queue и представляет функционал для двунаправленных очередей
+
+List: наследует интерфейс Collection и представляет функциональность простых списков
+
+Set: также расширяет интерфейс Collection и используется для хранения множеств уникальных объектов
+
+SortedSet: расширяет интерфейс Set для создания сортированных коллекций
+
+NavigableSet: расширяет интерфейс SortedSet для создания коллекций, в которых можно осуществлять поиск по соответствию
+
+Map: предназначен для созданий структур данных в виде словаря, где каждый элемент имеет определенный ключ и значение. В отличие от других интерфейсов коллекций не наследуется от интерфейса Collection
+
+Эти интерфейсы частично реализуются абстрактными классами:
+
+AbstractCollection: базовый абстрактный класс для других коллекций, который применяет интерфейс Collection
+
+AbstractList: расширяет класс AbstractCollection и применяет интерфейс List, предназначен для создания коллекций в виде списков
+
+AbstractSet: расширяет класс AbstractCollection и применяет интерфейс Set для создания коллекций в виде множеств
+
+AbstractQueue: расширяет класс AbstractCollection и применяет интерфейс Queue, предназначен для создания коллекций в виде очередей и стеков
+
+AbstractSequentialList: также расширяет класс AbstractList и реализует интерфейс List. Используется для создания связанных списков
+
+AbstractMap: применяет интерфейс Map, предназначен для создания наборов по типу словаря с объектами в виде пары "ключ-значение"
+
+С помощью применения вышеописанных интерфейсов и абстрактных классов в Java реализуется широкая палитра классов коллекций - списки, множества, очереди, отображения и другие, среди которых можно выделить следующие:
+
+ArrayList: простой список объектов
+
+LinkedList: представляет связанный список
+
+ArrayDeque: класс двунаправленной очереди, в которой мы можем произвести вставку и удаление как в начале коллекции, так и в ее конце
+
+HashSet: набор объектов или хеш-множество, где каждый элемент имеет ключ - уникальный хеш-код
+
+TreeSet: набор отсортированных объектов в виде дерева
+
+LinkedHashSet: связанное хеш-множество
+
+PriorityQueue: очередь приоритетов
+
+HashMap: структура данных в виде словаря, в котором каждый объект имеет уникальный ключ и некоторое значение
+
+TreeMap: структура данных в виде дерева, где каждый элемент имеет уникальный ключ и некоторое значение
+
+
+
+Java предоставляет множество функций для работы с коллекциями (collections). Ниже приведены некоторые из них:
+
+1. add() - добавляет элемент в коллекцию.
+
+List<String> list = new ArrayList<>();
+list.add("Hello");
+list.add("World");
+
+2. remove() - удаляет элемент из коллекции.
+
+List<String> list = new ArrayList<>();
+list.add("Hello");
+list.add("World");
+list.remove("Hello");
+
+3. contains() - проверяет, содержит ли коллекция определенный элемент.
+
+List<String> list = new ArrayList<>();
+list.add("Hello");
+list.add("World");
+boolean containsHello = list.contains("Hello");
+
+4. size() - возвращает количество элементов в коллекции.
+
+List<String> list = new ArrayList<>();
+list.add("Hello");
+list.add("World");
+int size = list.size();
+
+5. isEmpty() - проверяет, пуста ли коллекция.
+
+List<String> list = new ArrayList<>();
+boolean isEmpty = list.isEmpty();
+
+6. clear() - удаляет все элементы из коллекции.
+
+List<String> list = new ArrayList<>();
+list.add("Hello");
+list.add("World");
+list.clear();
+
+7. toArray() - возвращает массив, содержащий все элементы коллекции.
+
+List<String> list = new ArrayList<>();
+list.add("Hello");
+list.add("World");
+String[] array = list.toArray(new String[0]);
+
+8. addAll() - добавляет все элементы из одной коллекции в другую коллекцию.
+
+List<String> list1 = new ArrayList<>();
+list1.add("Hello");
+list1.add("World");
+
+List<String> list2 = new ArrayList<>();
+list2.addAll(list1);
+
+9. iterator() - возвращает итератор для перебора элементов коллекции.
+
+List<String> list = new ArrayList<>();
+list.add("Hello");
+list.add("World");
+
+Iterator<String> iterator = list.iterator();
+while (iterator.hasNext()) {
+    String element = iterator.next();
+    System.out.println(element);
+}
+
+10. stream() - возвращает поток элементов коллекции для выполнения операций над ними.
+
+List<String> list = new ArrayList<>();
+list.add("Hello");
+list.add("World");
+
+list.stream().forEach(System.out::println);
+
+Конечно, вот еще несколько функций для работы с коллекциями в Java:
+
+11. sort() - сортирует элементы коллекции.
+
+List<Integer> list = new ArrayList<>();
+list.add(3);
+list.add(1);
+list.add(2);
+
+Collections.sort(list); // сортировка по возрастанию
+
+12. subList() - возвращает подсписок элементов из коллекции.
+
+List<String> list = new ArrayList<>();
+list.add("Hello");
+list.add("World");
+list.add("Java");
+
+List<String> subList = list.subList(0, 2); // возвращает элементы с индексами 0 и 1
+
+13. indexOf() - возвращает индекс первого вхождения элемента в коллекцию.
+
+List<String> list = new ArrayList<>();
+list.add("Hello");
+list.add("World");
+list.add("Java");
+
+int index = list.indexOf("World"); // index = 1
+
+14. lastIndexOf() - возвращает индекс последнего вхождения элемента в коллекцию.
+
+List<String> list = new ArrayList<>();
+list.add("Hello");
+list.add("World");
+list.add("Java");
+list.add("World");
+
+int index = list.lastIndexOf("World"); // index = 3
+
+15. replaceAll() - заменяет все вхождения одного элемента на другой.
+
+List<String> list = new ArrayList<>();
+list.add("Hello");
+list.add("World");
+list.add("Java");
+list.add("World");
+
+Collections.replaceAll(list, "World", "Java"); // заменяем все вхождения "World" на "Java"
+
+16. retainAll() - удаляет все элементы из коллекции, кроме тех, которые есть в другой коллекции.
+
+List<String> list1 = new ArrayList<>();
+list1.add("Hello");
+list1.add("World");
+list1.add("Java");
+
+List<String> list2 = new ArrayList<>();
+list2.add("World");
+list2.add("Java");
+
+list1.retainAll(list2); // удаляем все элементы из list1, кроме "World" и "Java"
+
+17. containsAll() - проверяет, содержит ли коллекция все элементы из другой коллекции.
+
+List<String> list1 = new ArrayList<>();
+list1.add("Hello");
+list1.add("World");
+list1.add("Java");
+
+List<String> list2 = new ArrayList<>();
+list2.add("World");
+list2.add("Java");
+
+boolean containsAll = list1.containsAll(list2); // containsAll = true
+
+18. removeAll() - удаляет все элементы из коллекции, которые есть в другой коллекции.
+
+List<String> list1 = new ArrayList<>();
+list1.add("Hello");
+list1.add("World");
+list1.add("Java");
+
+List<String> list2 = new ArrayList<>();
+list2.add("World");
+list2.add("Java");
+
+list1.removeAll(list2); // удаляем все элементы из list1, которые есть в list2
+
