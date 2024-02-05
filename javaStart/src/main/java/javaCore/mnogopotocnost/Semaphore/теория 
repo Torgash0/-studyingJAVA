@@ -1,0 +1,113 @@
+Semaphore - это механизм синхронизации, который позволяет ограничить доступ к ресурсам определенным количеством потоков. Он представляет собой счетчик, который уменьшается каждый раз, когда поток получает доступ к ресурсу, и увеличивается, когда поток освобождает ресурс.
+
+В Java Semaphore реализуется классом java.util.concurrent.Semaphore. Он имеет два основных метода: acquire() и release(). Метод acquire() используется для захвата ресурса, уменьшения счетчика и блокировки потока, если счетчик равен нулю. Метод release() используется для освобождения ресурса и увеличения счетчика.
+
+Пример использования Semaphore:
+
+import java.util.concurrent.Semaphore;
+
+public class SemaphoreExample {
+    private static final int MAX_THREADS = 5;
+    private static final Semaphore SEMAPHORE = new Semaphore(MAX_THREADS);
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            Thread thread = new Thread(new Task());
+            thread.start();
+        }
+    }
+
+    static class Task implements Runnable {
+        @Override
+        public void run() {
+            try {
+                SEMAPHORE.acquire();
+                System.out.println("Thread " + Thread.currentThread().getName() + " acquired the semaphore");
+                Thread.sleep(1000);
+                SEMAPHORE.release();
+                System.out.println("Thread " + Thread.currentThread().getName() + " released the semaphore");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+В этом примере мы создаем Semaphore с максимальным количеством потоков равным 5. Затем мы запускаем 10 потоков, каждый из которых выполняет задачу, которая пытается захватить Semaphore, выполняет некоторую работу и освобождает Semaphore.
+
+Вывод программы будет выглядеть примерно так:
+
+Thread Thread-1 acquired the semaphore
+Thread Thread-0 acquired the semaphore
+Thread Thread-2 acquired the semaphore
+Thread Thread-3 acquired the semaphore
+Thread Thread-4 acquired the semaphore
+Thread Thread-1 released the semaphore
+Thread Thread-5 acquired the semaphore
+Thread Thread-0 released the semaphore
+Thread Thread-6 acquired the semaphore
+Thread Thread-2 released the semaphore
+Thread Thread-7 acquired the semaphore
+Thread Thread-3 released the semaphore
+Thread Thread-8 acquired the semaphore
+Thread Thread-4 released the semaphore
+Thread Thread-9 acquired the semaphore
+Thread Thread-5 released the semaphore
+Thread Thread-6 released the semaphore
+Thread Thread-7 released the semaphore
+Thread Thread-8 released the semaphore
+Thread Thread-9 released the semaphore
+
+Как видно из вывода, одновременно может быть захвачено не более 5 Semaphore, что соответствует максимальному количеству потоков. Когда один поток освобождает Semaphore, другой поток может его захватить и продолжить выполнение своей задачи.
+Вот несколько часто используемых методов класса Semaphore в Java:
+
+1. acquire(): захватывает Semaphore, уменьшает его счетчик и блокирует поток, если счетчик равен нулю.
+
+Semaphore semaphore = new Semaphore(1);
+semaphore.acquire();
+// выполнение задачи
+semaphore.release();
+
+2. tryAcquire(): пытается захватить Semaphore, возвращает true, если удалось захватить, и false, если нет.
+
+Semaphore semaphore = new Semaphore(1);
+if (semaphore.tryAcquire()) {
+    // выполнение задачи
+    semaphore.release();
+} else {
+    // обработка случая, когда Semaphore не был захвачен
+}
+
+3. release(): освобождает Semaphore и увеличивает его счетчик.
+
+Semaphore semaphore = new Semaphore(1);
+semaphore.acquire();
+// выполнение задачи
+semaphore.release();
+
+4. availablePermits(): возвращает количество разрешений, которые могут быть выданы Semaphore без блокировки потока.
+
+Semaphore semaphore = new Semaphore(5);
+int permits = semaphore.availablePermits();
+System.out.println("Available permits: " + permits); // выводит "Available permits: 5"
+
+5. acquireUninterruptibly(): захватывает Semaphore, уменьшает его счетчик и блокирует поток без возможности прерывания.
+
+Semaphore semaphore = new Semaphore(1);
+semaphore.acquireUninterruptibly();
+// выполнение задачи
+semaphore.release();
+
+6. tryAcquire(long timeout, TimeUnit unit): пытается захватить Semaphore в течение заданного времени, возвращает true, если удалось захватить, и false, если нет.
+
+Semaphore semaphore = new Semaphore(1);
+try {
+    if (semaphore.tryAcquire(1, TimeUnit.SECONDS)) {
+        // выполнение задачи
+        semaphore.release();
+    } else {
+        // обработка случая, когда Semaphore не был захвачен в течение 1 секунды
+    }
+} catch (InterruptedException e) {
+    e.printStackTrace();
+}

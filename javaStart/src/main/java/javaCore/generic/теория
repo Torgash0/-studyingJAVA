@@ -1,0 +1,223 @@
+Дженерики (Generics) в Java - это механизм, который позволяет создавать параметризованные типы данных, то есть классы,
+интерфейсы и методы, которые могут работать с различными типами данных.
+Основная идея дженериков заключается в том, чтобы обеспечить безопасность типов данных и повторное использование кода.
+Вместо того, чтобы создавать несколько версий одного и того же класса для разных типов данных, можно создать одну универсальную версию,
+которая будет работать с любым типом данных.
+Примеры использования дженериков в Java:
+
+1. Создание параметризованного класса:
+public class Box<T> {
+    private T item;
+
+    public void setItem(T item) {
+        this.item = item;
+    }
+
+    public T getItem() {
+        return item;
+    }
+}
+В этом примере мы создаем класс Box, который может содержать элементы любого типа данных. T - это параметр типа или тип-плейсхолдер, который будет заменен на конкретный тип данных при создании экземпляра класса.
+
+2. Использование параметризованного класса:
+Box<Integer> box = new Box<>();
+box.setItem(10);
+int item = box.getItem();
+В этом примере мы создаем экземпляр класса Box с параметром типа Integer и устанавливаем значение элемента. Затем мы получаем значение элемента и сохраняем его в переменную типа int.
+
+3. Создание параметризованного метода:
+public static <T> void printArray(T[] array) {
+    for (T element : array) {
+        System.out.println(element);
+    }
+}
+В этом примере мы создаем статический метод printArray, который может работать с массивами любого типа данных. T - это параметр типа, который будет заменен на конкретный тип данных при вызове метода.
+
+4. Использование параметризованного метода:
+Integer[] array = {1, 2, 3, 4, 5};
+printArray(array);
+В этом примере мы вызываем метод printArray с массивом типа Integer. В результате метод выведет на экран все элементы массива.
+
+Дженериком также может быть класс-коллекция, например, ArrayList:
+ArrayList<String> list = new ArrayList<>();
+list.add("apple");
+list.add("banana");
+String fruit = list.get(0);
+В этом примере мы создаем список типа String, добавляем два элемента и получаем первый элемент списка.
+
+
+
+
+
+
+Wildcards (джокеры) в Java - это механизм, который позволяет создавать более гибкие и универсальные типы для работы с generic-классами и интерфейсами.
+
+Они позволяют определить неопределенный тип данных, который может быть заменен на любой другой тип данных во время компиляции или выполнения программы.
+
+Существует три типа джокеров в Java:
+
+1. ? - неопределенный джокер. Он может быть заменен на любой тип данных.
+2. ? extends Type - ограниченный джокер сверху. Он может быть заменен на любой тип данных, который является подтипом Type.
+3. ? super Type - ограниченный джокер снизу. Он может быть заменен на любой тип данных, который является супертипом Type.
+
+Примеры использования wildcards в Java:
+
+1. Неопределенный джокер:
+List<?> list = new ArrayList<>();
+В этом примере мы создаем список, который может содержать элементы любого типа данных.
+
+2. Ограниченный джокер сверху:
+List<? extends Number> list = new ArrayList<>();
+В этом примере мы создаем список, который может содержать элементы любого типа данных, который является подтипом Number (например, Integer, Double, Float).
+
+3. Ограниченный джокер снизу:
+List<? super Integer> list = new ArrayList<>();
+В этом примере мы создаем список, который может содержать элементы любого типа данных, который является супертипом Integer (например, Number, Object).
+
+
+
+
+
+
+
+
+
+
+
+Обобщенные интерфейсы
+public class Program{
+
+    public static void main(String[] args) {
+
+        Accountable<String> acc1 = new Account("1235rwr", 5000);
+        Account acc2 = new Account("2373", 4300);
+        System.out.println(acc1.getId());
+        System.out.println(acc2.getId());
+    }
+}
+interface Accountable<T>{
+    T getId();
+    int getSum();
+    void setSum(int sum);
+}
+class Account implements Accountable<String>{
+
+    private String id;
+    private int sum;
+
+    Account(String id, int sum){
+        this.id = id;
+        this.sum = sum;
+    }
+
+    public String getId() { return id; }
+    public int getSum() { return sum; }
+    public void setSum(int sum) { this.sum = sum; }
+}
+При реализации подобного интерфейса есть две стратегии. В данном случае реализована первая стратегия, когда при реализации для универсального параметра интерфейса задается конкретный тип, как например, в данном случае это тип String. Тогда класс, реализующий интерфейс, жестко привязан к этому типу.
+
+Вторая стратегия представляет определение обобщенного класса, который также использует тот же универсальный параметр:
+public class Program{
+
+    public static void main(String[] args) {
+
+        Account<String> acc1 = new Account<String>("1235rwr", 5000);
+        Account<String> acc2 = new Account<String>("2373", 4300);
+        System.out.println(acc1.getId());
+        System.out.println(acc2.getId());
+    }
+}
+interface Accountable<T>{
+    T getId();
+    int getSum();
+    void setSum(int sum);
+}
+class Account<T> implements Accountable<T>{
+
+    private T id;
+    private int sum;
+
+    Account(T id, int sum){
+        this.id = id;
+        this.sum = sum;
+    }
+
+    public T getId() { return id; }
+    public int getSum() { return sum; }
+    public void setSum(int sum) { this.sum = sum; }
+}
+
+
+Обобщенные методы
+public class Program{
+
+    public static void main(String[] args) {
+
+        Printer printer = new Printer();
+        String[] people = {"Tom", "Alice", "Sam", "Kate", "Bob", "Helen"};
+        Integer[] numbers = {23, 4, 5, 2, 13, 456, 4};
+        printer.<String>print(people);
+        printer.<Integer>print(numbers);
+    }
+}
+
+class Printer{
+
+    public <T> void print(T[] items){
+        for(T item: items){
+            System.out.println(item);
+        }
+    }
+}
+Использование нескольких универсальных параметров
+
+public class Program{
+
+    public static void main(String[] args) {
+
+        Account<String, Double> acc1 = new Account<String, Double>("354", 5000.87);
+        String id = acc1.getId();
+        Double sum = acc1.getSum();
+        System.out.printf("Id: %s  Sum: %f \n", id, sum);
+    }
+}
+class Account<T, S>{
+
+    private T id;
+    private S sum;
+
+    Account(T id, S sum){
+        this.id = id;
+        this.sum = sum;
+    }
+
+    public T getId() { return id; }
+    public S getSum() { return sum; }
+    public void setSum(S sum) { this.sum = sum; }
+}
+Обобщенные конструкторы
+public class Program{
+
+    public static void main(String[] args) {
+
+        Account acc1 = new Account("cid2373", 5000);
+        Account acc2 = new Account(53757, 4000);
+        System.out.println(acc1.getId());
+        System.out.println(acc2.getId());
+    }
+}
+
+class Account{
+
+    private String id;
+    private int sum;
+
+    <T>Account(T id, int sum){
+        this.id = id.toString();
+        this.sum = sum;
+    }
+
+    public String getId() { return id; }
+    public int getSum() { return sum; }
+    public void setSum(int sum) { this.sum = sum; }
+}

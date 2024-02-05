@@ -1,0 +1,41 @@
+Асинхронное программирование в Java часто используется для выполнения длительных операций без блокирования основного потока выполнения. Это позволяет улучшить производительность приложения и обеспечить более отзывчивый пользовательский интерфейс.
+
+Пример 1: Использование CompletableFuture
+import java.util.concurrent.CompletableFuture;
+
+public class AsyncExample {
+    public static void main(String[] args) {
+        CompletableFuture.supplyAsync(() -> {
+            // Долгая операция
+            return "Результат операции";
+        }).thenAccept(result -> {
+            System.out.println("Результат: " + result);
+        });
+
+        // Код, который выполняется параллельно с CompletableFuture
+    }
+}
+
+В этом примере CompletableFuture.supplyAsync() запускает долгую операцию асинхронно, а метод thenAccept() позволяет указать действие, которое нужно выполнить после завершения операции.
+
+Пример 2: Использование ExecutorService
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class AsyncExample {
+    public static void main(String[] args) {
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        executor.submit(() -> {
+            // Долгая операция
+            System.out.println("Выполнение операции");
+        });
+
+        // Код, который выполняется параллельно с операцией
+        executor.shutdown();
+    }
+}
+
+В этом примере создается пул потоков с помощью Executors.newFixedThreadPool(), и долгая операция выполняется асинхронно с помощью executor.submit(). После выполнения операции необходимо вызвать executor.shutdown() для завершения работы пула потоков.
+
+Оба примера демонстрируют способы реализации асинхронного программирования в Java с использованием CompletableFuture и ExecutorService.
