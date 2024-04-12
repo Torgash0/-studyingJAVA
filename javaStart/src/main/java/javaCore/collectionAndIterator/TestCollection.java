@@ -16,10 +16,9 @@ public class TestCollection {
                 iterator.remove();
             }
         }
+
         System.out.println(list);
         Set<Integer> set = new TreeSet<>(list);
         System.out.println(set);
-
-
     }
 }

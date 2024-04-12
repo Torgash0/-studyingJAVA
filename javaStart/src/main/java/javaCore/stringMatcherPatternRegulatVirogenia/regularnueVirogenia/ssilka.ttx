@@ -1,0 +1,49 @@
+https://javarush.com/groups/posts/regulyarnye-vyrazheniya-v-java
+
+Регулярные выражения (Regular Expressions) в Java - это мощный инструмент для работы с текстовыми данными. Они представляют
+собой шаблоны символов, которые позволяют осуществлять поиск, замену и сопоставление текста с заданным образцом.
+
+В Java работа с регулярными выражениями осуществляется с использованием классов Pattern и Matcher из пакета java.util.regex.
+
+Примеры использования регулярных выражений в Java:
+
+1. Поиск подстроки в строке:
+import java.util.regex.*;
+
+String text = "Hello, World! This is a sample text.";
+Pattern pattern = Pattern.compile("sample");
+Matcher matcher = pattern.matcher(text);
+
+if (matcher.find()) {
+    System.out.println("Match found at index: " + matcher.start());
+}
+
+2. Замена подстроки в строке:
+String text = "The quick brown fox jumps over the lazy dog.";
+String replacedText = text.replaceAll("fox", "cat");
+System.out.println(replacedText);
+
+3. Проверка на соответствие шаблону:
+String email = "example@example.com";
+Pattern emailPattern = Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}");
+Matcher emailMatcher = emailPattern.matcher(email);
+
+if (emailMatcher.matches()) {
+    System.out.println("Valid email address");
+} else {
+    System.out.println("Invalid email address");
+}
+
+4. Использование групп в регулярных выражениях:
+String text = "Name: John, Age: 30";
+Pattern pattern = Pattern.compile("Name: (\\w+), Age: (\\d+)");
+Matcher matcher = pattern.matcher(text);
+
+if (matcher.find()) {
+    String name = matcher.group(1);
+    int age = Integer.parseInt(matcher.group(2));
+    System.out.println("Name: " + name + ", Age: " + age);
+}
+
+Это лишь небольшой обзор возможностей регулярных выражений в Java. Они позволяют выполнять сложные операции по обработке
+текста, поиску шаблонов и манипуляции с данными.

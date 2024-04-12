@@ -3,10 +3,8 @@ package javaCore.mnogopotocnost.Future;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
+import java.util.function.Supplier;
 
 public class CallbleExample implements Callable {
     private String word;
@@ -25,13 +23,14 @@ public class CallbleExample implements Callable {
         Scanner sc = new Scanner(System.in);
         String[] strs = sc.nextLine().split(" ");
 
-        ExecutorService pool = Executors.newFixedThreadPool(10);
+        ExecutorService pool = Executors.newFixedThreadPool(2);
         Set<Future<Integer>> set1 = new HashSet<>();
         for (String word : strs) {
             Callable<Integer> callable = new CallbleExample(word);
             Future<Integer> future = pool.submit(callable);
             set1.add(future);
         }
+
         int sum = 0;
         for (Future<Integer> future : set1) {
             sum += future.get();

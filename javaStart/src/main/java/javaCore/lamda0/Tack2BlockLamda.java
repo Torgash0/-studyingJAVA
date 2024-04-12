@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Tack2BlockLamda {
+public class  Tack2BlockLamda {
     public static void main(String[] args) {
         String[] s1 = new String[]{"aaas", "bafsafaf", "c"};
         String[] s2 = new String[]{"ab", "bc", "cd"};

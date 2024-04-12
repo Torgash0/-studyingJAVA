@@ -8,11 +8,12 @@ public class Pair<K, V> {
         this.value = value;
     }
     public static void main(String[] args) {
-        Pair<Day, Integer>[] schelduler = new   Pair[4];
+        Pair<Day, Integer>[] schelduler = new Pair[5];
         schelduler[0] = new Pair<>(Day.mnd, 4);
         schelduler[1] = new Pair<>(Day.thsd, Day.thsd.getWorkingHouer());
         schelduler[2] = new Pair<>(Day.frd, 0);
         schelduler[3] = new Pair<>(Day.snd, 8);
+        schelduler[4] = new Pair<>(Day.wsd, 4);
         for (Pair p : schelduler){
             System.out.println(p.key + " " + p.value + " " + ((Day)p.key).getWorkingHouer());
         }

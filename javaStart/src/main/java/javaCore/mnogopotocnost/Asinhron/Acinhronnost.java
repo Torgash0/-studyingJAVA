@@ -1,5 +1,6 @@
 package javaCore.mnogopotocnost.Asinhron;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 
 public class Acinhronnost {

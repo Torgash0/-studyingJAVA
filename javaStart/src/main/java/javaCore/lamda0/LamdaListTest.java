@@ -21,7 +21,7 @@ public class LamdaListTest {
         V execute(T t);
     }
 
-    private static Operation action(List<Integer> list) {
+    public static Operation action(List<Integer> list) {
         if (list.size() > 20) {
             Operation<Integer, List<Integer>> operation = l -> {
                 int sum = 0;

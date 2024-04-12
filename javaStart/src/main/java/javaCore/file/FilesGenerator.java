@@ -14,11 +14,11 @@ public class FilesGenerator {
         for (int i = 0; i < 20; i++) {
             File f = new File(dir, "file_" + i + ".txt");
             f.createNewFile();
-            try(OutputStream os = new FileOutputStream(f); BufferedOutputStream bos = new BufferedOutputStream(os)) { //вот строчка с буффером
+            try (OutputStream os = new FileOutputStream(f);
+                 BufferedOutputStream bos = new BufferedOutputStream(os)) { //вот строчка с буффером
 
                 bos.write(("java " + i).getBytes());
-            }
-            catch (IOException e){
+            } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -26,10 +26,10 @@ public class FilesGenerator {
 //        for(File f :dir.listFiles()){
 //            System.out.println(f.getName());
 //        }
-        for(File f :dir.listFiles()){
-            try (FileReader fr = new FileReader(f); Scanner scanner = new Scanner(fr)){
-                while (scanner.hasNext()){
-                    if (scanner.nextLine().equals("java 7")){
+        for (File f : dir.listFiles()) {
+            try (FileReader fr = new FileReader(f); Scanner scanner = new Scanner(fr)) {
+                while (scanner.hasNext()) {
+                    if (scanner.nextLine().equals("java 7")) {
                         System.out.println("я нашел его " + f.getName());
                     }
                 }

@@ -24,5 +24,11 @@ public class MyThread implements Runnable {
         new Thread(new MyThread()).start();
         new Thread(new MyThread()).start();
         new Thread(new MyThread()).start();
+
+
+
+        var a =  new MyThread();
+        Thread thread = new Thread(a);
+        thread.start();
     }
 }

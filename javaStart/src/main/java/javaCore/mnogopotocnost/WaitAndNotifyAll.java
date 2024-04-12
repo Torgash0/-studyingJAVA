@@ -2,13 +2,15 @@ package javaCore.mnogopotocnost;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.function.Consumer;
 
 public class WaitAndNotifyAll {
     public static void main(String[] args) {
         MessageQueue queue = new MessageQueue();
 
+
         Thread producerThread = new Thread(() -> {
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 6; i++) {
                 String message = "Message " + i;
                 queue.produce(message);
                 System.out.println("Produced: " + message);
@@ -21,7 +23,7 @@ public class WaitAndNotifyAll {
         });
 
         Thread consumerThread1 = new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 3; i++) {
                 String message = queue.consume();
                 System.out.println("Consumed by Thread 1: " + message);
                 try {
@@ -33,7 +35,7 @@ public class WaitAndNotifyAll {
         });
 
         Thread consumerThread2 = new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 3; i++) {
                 String message = queue.consume();
                 System.out.println("Consumed by Thread 2: " + message);
                 try {

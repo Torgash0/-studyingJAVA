@@ -9,7 +9,7 @@ Stream<String> streamFromValues = Stream.of("1", "2", "3");
 String[] array = ("1", "2", "3");
 Stream<String> streamFromArrays = Arrays.stream(array);
 4 создание потока из файла (построчный перебор)
-Strean <String> streamFromFile = File.lines(Paths.get("file.txt"));
+Stream <String> streamFromFile = File.lines(Paths.get("file.txt"));
 5 поток из строки
 IntStream streamFromString = "123".chars();
 6 создание потока с помощью Stream.iterate
@@ -1557,8 +1557,7 @@ max.ifPresent(System.out::println);
 groupingBy(Function classifier)
 groupingBy(Function classifier, Collector downstream)
 groupingBy(Function classifier, Supplier mapFactory, Collector downstream)
-Группирует элементы по критерию, сохраняя результат в Map. Вместе с представленными выше агрегирующими коллекторами, позволяет гибко собирать данные. Подробнее о комбинировании в разделе Примеры.
-
+Группирует элементы по критерию, сохраняя результат в Map. Вместе с представленными выше агрегирующими коллекторами, позволяет гибко собирать данные. Подробнее о комбинировании в разделе Пример
 groupingByConcurrent(Function classifier)
 groupingByConcurrent(Function classifier, Collector downstream)
 groupingByConcurrent(Function classifier, Supplier mapFactory, Collector downstream)

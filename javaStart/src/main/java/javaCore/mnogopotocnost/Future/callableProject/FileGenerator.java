@@ -12,7 +12,7 @@ public class FileGenerator implements Callable {
         String threadName = Thread.currentThread().getName();
         List<String> fileList = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
-            String fileName = "/Users/gaydaev/IdeaProjects/study/src/main/java/mnogopotocnost/callableProject" + threadName + i + ".txt";
+            String fileName = "/Users/gaydaev/IdeaProjects/-studyingJAVA/javaStart/src/main/java/javaCore/mnogopotocnost/Future/callableProject" + threadName + i + ".txt";
             fileList.add(fileName);
             try (OutputStream ou = new FileOutputStream(fileName);
                 BufferedOutputStream bos = new BufferedOutputStream(ou)) {

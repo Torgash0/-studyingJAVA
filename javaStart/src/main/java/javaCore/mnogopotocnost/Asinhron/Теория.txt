@@ -1,4 +1,75 @@
-Асинхронное программирование в Java часто используется для выполнения длительных операций без блокирования основного потока выполнения. Это позволяет улучшить производительность приложения и обеспечить более отзывчивый пользовательский интерфейс.
+Асинхронное программирование в Java часто используется для выполнения длительных операций без блокирования основного потока выполнения.
+Это позволяет улучшить производительность приложения и обеспечить более отзывчивый пользовательский интерфейс.
+
+Асинхронное программирование в Java позволяет выполнять операции параллельно и не блокировать основной поток выполнения,
+что повышает производительность и отзывчивость приложения. В Java для асинхронного программирования можно использовать
+множество подходов, такие как использование потоков, ExecutorService, CompletableFuture и Future.
+Давайте рассмотрим примеры использования асинхронного программирования в Java с помощью ExecutorService и CompletableFuture.
+
+### Пример с использованием ExecutorService:
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+public class AsyncExample {
+
+    public static void main(String[] args) {
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        Future<Integer> futureResult = executor.submit(() -> {
+            Thread.sleep(2000); // имитация длительной операции
+            return 42;
+        });
+
+        System.out.println("Основной поток продолжает работу...");
+
+        try {
+            int result = futureResult.get();
+            System.out.println("Результат выполнения: " + result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        executor.shutdown();
+    }
+}
+
+В этом примере мы создаем ExecutorService с фиксированным пулом из двух потоков. Мы отправляем задачу на выполнение
+ асинхронно с помощью метода submit(), который возвращает объект Future. Мы можем продолжать выполнение основного потока,
+ пока задача выполняется в фоновом режиме. Метод get() блокирует основной поток до завершения выполнения задачи.
+
+### Пример с использованием CompletableFuture:
+
+import java.util.concurrent.CompletableFuture;
+
+public class CompletableFutureExample {
+
+    public static void main(String[] args) {
+        CompletableFuture<Integer> futureResult = CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(2000); // имитация длительной операции
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return 42;
+        });
+
+        System.out.println("Основной поток продолжает работу...");
+
+        futureResult.thenAccept(result -> System.out.println("Результат выполнения: " + result));
+    }
+}
+
+В этом примере мы используем CompletableFuture для создания асинхронной задачи с помощью метода supplyAsync().
+Мы можем продолжать выполнение основного потока, пока задача выполняется в фоновом режиме. Метод thenAccept() позволяет
+указать действие, которое будет выполнено по завершении задачи.
+
+Это лишь небольшие примеры использования асинхронного программирования в Java. Существует множество других способов
+и инструментов для реализации асинхронности в Java, таких как Executor, CompletionStage и т.д. Надеюсь, что эти примеры
+помогут вам понять основы асинхронного программирования в Java.
+
+
 
 Пример 1: Использование CompletableFuture
 import java.util.concurrent.CompletableFuture;
@@ -39,3 +110,81 @@ public class AsyncExample {
 В этом примере создается пул потоков с помощью Executors.newFixedThreadPool(), и долгая операция выполняется асинхронно с помощью executor.submit(). После выполнения операции необходимо вызвать executor.shutdown() для завершения работы пула потоков.
 
 Оба примера демонстрируют способы реализации асинхронного программирования в Java с использованием CompletableFuture и ExecutorService.
+
+Асинхронное программирование в Java позволяет эффективно использовать ресурсы компьютера и создавать отзывчивые и масштабируемые приложения. Это особенно важно при работе с сетевыми операциями, базами данных, вводом/выводом и другими задачами, которые могут блокировать исполнение потока.
+
+В Java асинхронное программирование часто реализуется с использованием классов из пакета java.util.concurrent, таких как CompletableFuture, ExecutorService и других. Вот несколько примеров асинхронного программирования в Java:
+
+CompletableFuture:
+CompletableFuture позволяет создавать асинхронные задачи и обрабатывать их результаты.
+
+java
+Copy code
+CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
+    // Асинхронная задача
+    return 10;
+}).thenApplyAsync(result -> {
+    // Обработка результата асинхронной задачи
+    return result * 2;
+});
+
+future.thenAcceptAsync(result -> {
+    // Действия с результатом
+    System.out.println("Результат: " + result);
+});
+ExecutorService:
+ExecutorService предоставляет управление потоками выполнения задач и позволяет выполнять задачи асинхронно.
+
+java
+Copy code
+ExecutorService executor = Executors.newFixedThreadPool(2);
+Future<Integer> future = executor.submit(() -> {
+    // Асинхронная задача
+    return 10;
+});
+
+while (!future.isDone()) {
+    // Ожидание завершения задачи
+}
+
+try {
+    Integer result = future.get();
+    System.out.println("Результат: " + result);
+} catch (InterruptedException | ExecutionException e) {
+    e.printStackTrace();
+} finally {
+    executor.shutdown();
+}
+Callback-методы:
+Асинхронные операции могут принимать callback-методы для обработки результатов.
+
+java
+Copy code
+interface Callback {
+    void onSuccess(String result);
+    void onFailure(Throwable t);
+}
+
+void asyncOperation(Callback callback) {
+    // Асинхронная операция
+    try {
+        // Обработка успешного результата
+        callback.onSuccess("Результат выполнения асинхронной операции");
+    } catch (Exception e) {
+        // Обработка ошибки
+        callback.onFailure(e);
+    }
+}
+
+// Пример использования
+asyncOperation(new Callback() {
+    @Override
+    public void onSuccess(String result) {
+        System.out.println("Успех: " + result);
+    }
+
+    @Override
+    public void onFailure(Throwable t) {
+        System.out.println("Ошибка: " + t.getMessage());
+    }
+});
