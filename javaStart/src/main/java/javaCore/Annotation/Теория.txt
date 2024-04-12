@@ -1,0 +1,34 @@
+Аннотации в Java - это специальные метаданные, которые могут быть добавлены к классам, методам, полям и другим элементам программы.
+Они предоставляют дополнительную информацию о коде, которая может быть использована компилятором или другими инструментами для выполнения определенных действий.
+
+Примеры использования аннотаций в Java:
+
+1. Создание собственной аннотации:
+import java.lang.annotation.*;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface MyAnnotation {
+    String value();
+}
+
+2. Использование аннотации на методе:
+public class MyClass {
+    @MyAnnotation("This is a custom annotation")
+    public void myMethod() {
+        // Method implementation
+    }
+}
+
+3. Получение информации из аннотации во время выполнения:
+public class Main {
+    public static void main(String[] args) throws Exception {
+        MyClass obj = new MyClass();
+        Method method = obj.getClass().getMethod("myMethod");
+        MyAnnotation annotation = method.getAnnotation(MyAnnotation.class);
+        System.out.println(annotation.value());
+    }
+}
+
+Это простой пример использования аннотаций в Java. Аннотации могут быть использованы для различных целей, таких как описания
+методов, указания параметров компиляции, конфигурирования библиотек и т.д.

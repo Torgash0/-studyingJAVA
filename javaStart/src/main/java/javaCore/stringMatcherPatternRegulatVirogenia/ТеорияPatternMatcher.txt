@@ -1,0 +1,61 @@
+Классы Pattern и Matcher из пакета java.util.regex в Java предоставляют возможность работы с регулярными выражениями для поиска, сопоставления и обработки текстовых данных.
+
+### Pattern
+Класс Pattern представляет собой компилированный шаблон регулярного выражения. Он используется для создания объекта Matcher, который затем используется для выполнения операций с текстом.
+
+Пример создания объекта Pattern:
+Pattern pattern = Pattern.compile("hello");
+
+### Matcher
+Класс Matcher используется для поиска совпадений регулярного выражения в тексте. Он создается путем вызова метода matcher() на объекте Pattern.
+
+Пример использования объекта Matcher для поиска совпадений:
+String text = "Hello, World! This is a sample text.";
+Pattern pattern = Pattern.compile("sample");
+Matcher matcher = pattern.matcher(text);
+
+if (matcher.find()) {
+    System.out.println("Match found at index: " + matcher.start());
+}
+
+### Примеры использования Pattern и Matcher:
+1. Поиск всех совпадений в тексте:
+String text = "Java is a programming language. Java is popular.";
+Pattern pattern = Pattern.compile("Java");
+Matcher matcher = pattern.matcher(text);
+
+while (matcher.find()) {
+    System.out.println("Found at index: " + matcher.start());
+}
+
+2. Замена совпадений в тексте:
+String text = "The quick brown fox jumps over the lazy dog.";
+Pattern pattern = Pattern.compile("fox");
+Matcher matcher = pattern.matcher(text);
+String replacedText = matcher.replaceAll("cat");
+
+System.out.println(replacedText);
+
+3. Проверка на соответствие шаблону:
+String email = "example@example.com";
+Pattern emailPattern = Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}");
+Matcher emailMatcher = emailPattern.matcher(email);
+
+if (emailMatcher.matches()) {
+    System.out.println("Valid email address");
+} else {
+    System.out.println("Invalid email address");
+}
+
+4. Использование групп в регулярных выражениях:
+String text = "Name: John, Age: 30";
+Pattern pattern = Pattern.compile("Name: (\\w+), Age: (\\d+)");
+Matcher matcher = pattern.matcher(text);
+
+if (matcher.find()) {
+    String name = matcher.group(1);
+    int age = Integer.parseInt(matcher.group(2));
+    System.out.println("Name: " + name + ", Age: " + age);
+}
+
+Это лишь небольшой обзор возможностей классов Pattern и Matcher для работы с регулярными выражениями в Java. Они позволяют эффективно обрабатывать текстовые данные, выполнять поиск и замену шаблонов, а также извлекать информацию из текста.
