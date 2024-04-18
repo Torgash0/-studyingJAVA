@@ -14,7 +14,7 @@ public class SocketClient {
             var scaner = new Scanner(System.in)) {
                 while (scaner.hasNext()){
                     outputStream.writeUTF(scaner.nextLine());
-                    System.out.println("Сервер" + inputStream.readUTF());
+                    System.out.println("Сервер " + inputStream.readUTF());
                 }
 
 

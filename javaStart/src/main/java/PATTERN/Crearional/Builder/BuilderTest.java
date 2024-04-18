@@ -8,8 +8,13 @@ public class BuilderTest {
         builder.setFirstName("ivan");
         System.out.println(builder.createProgrammer());
         builder = director.createSenior(builder);
-        builder.setFirstName("Ivan");
+        builder.setFirstName("Dima");
         builder.setage(10);
+        builder.setLastName("Ivanov");
+        System.out.println(builder.createProgrammer());
+        builder =  director.createSenior(builder);
+        builder.setFirstName("Vasek");
         System.out.println(builder.createProgrammer());
     }
+
 }

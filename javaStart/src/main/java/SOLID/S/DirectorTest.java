@@ -1,4 +1,4 @@
-package SOLID;
+package SOLID.S;
 
 public class DirectorTest {
     public static void main(String[] args) {

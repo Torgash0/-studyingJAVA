@@ -4,9 +4,9 @@ import javaCore.generic.C;
 
 public class StreategyExample {
     public static void main(String[] args) {
-        boolean fullStrategy =  true;
+        //boolean fullStrategy =  true;
         double startPrice = 100;
-        Context context = new Context(new HalfPrice());
+        Context context = new Context(new FullPrice());
         double price = context.getPrice(startPrice);
         System.out.println(price);
     }

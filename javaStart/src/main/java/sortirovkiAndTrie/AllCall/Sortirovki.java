@@ -7,13 +7,14 @@ public class Sortirovki {
 //        for (int i = 0; i < arr.length; i++) {
 //            arr[i] = sc.nextInt();
 //        }
-        int[] arry = new int[]{1,2,5,50,100};
+        int[] arry = new int[]{1,2,5,50,100,50};
 //        bubleSort(arr);
 //        viborSort(arr);
 //        vstakaSort(arr);
 //        fastHoaraSort(arr);
 //        lamutoSort(arr);
-        System.out.println( binarySearch(2,arry));
+
+        System.out.println( binarySearch(50,arry));
         //viborSort(arry);
 //        System.out.println(binarySearch(50, array));
 
@@ -137,7 +138,7 @@ public class Sortirovki {
 
 
 
-//бинарная сортировка
+//бинареый поиск
     static int binarySearch(int value, int[] array) {
         int lowIndex = 0;
         int hightIndex = array.length - 1;

@@ -1,4 +1,4 @@
-package SOLID;
+package SOLID.S;
 
 public class  Director {
     private static volatile Director instance;
