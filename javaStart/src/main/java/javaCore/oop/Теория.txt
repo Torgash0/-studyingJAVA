@@ -1,0 +1,133 @@
+бъектно-ориентированное программирование (ООП) - это парадигма программирования, основанная на концепции объектов,
+которые представляют собой экземпляры классов, и на взаимодействии между этими объектами. В Java ООП строится на трех
+основных концепциях: инкапсуляция, наследование и полиморфизм
+Инкапсуляция (Encapsulation):
+Инкапсуляция означает объединение данных и методов, которые работают с этими данными, в один объект.
+Цель инкапсуляции - скрыть детали реализации объекта и предоставить только интерфейс для взаимодействия с ним.
+public class Car {
+    private String model;
+    private int year;
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+}
+Наследование (Inheritance):
+Наследование позволяет создавать новые классы на основе существующих, наследуя их свойства и методы. Класс, который
+наследует свойства другого класса, называется подклассом (или производным классом), а класс, чьи свойства наследуются,
+называется суперклассом (или базовым классом).
+public class Vehicle {
+    private String color;
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+}
+
+public class Car extends Vehicle {
+    private String model;
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+}
+Полиморфизм (Polymorphism):
+Полиморфизм позволяет объектам одного типа представлять себя как объекты другого типа. Он может быть реализован через
+перегрузку методов (overloading) и переопределение методов (overriding).
+public class Animal {
+    public void makeSound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+public class Dog extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class Cat extends Animal {
+    @Override
+    public void makeSound() {
+        System.out.println("Cat meows");
+    }
+}
+Полиморфизм может быть достигнут также с помощью интерфейсов и абстрактных классов.
+
+
+
+
+Пример композиции:
+// Класс Engine представляет собой компонент двигателя
+class Engine {
+    public void start() {
+        System.out.println("Engine started");
+    }
+}
+
+// Класс Car содержит объект Engine как часть себя
+class Car {
+    private Engine engine;
+
+    public Car() {
+        this.engine = new Engine();
+    }
+
+    public void startCar() {
+        engine.start();
+        System.out.println("Car started");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car myCar = new Car();
+        myCar.startCar();
+    }
+}
+
+Пример наследования:
+// Родительский класс Vehicle
+class Vehicle {
+    public void move() {
+        System.out.println("Vehicle is moving");
+    }
+}
+
+// Дочерний класс Car наследует функциональность от Vehicle
+class Car extends Vehicle {
+    public void startCar() {
+        System.out.println("Car started");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car myCar = new Car();
+        myCar.move(); // Метод move унаследован от Vehicle
+        myCar.startCar();
+    }
+}
+
+В первом примере показана композиция, где класс Car содержит объект Engine как часть себя. Во втором примере демонстрируется наследование, где класс Car наследует функциональность от родительского класса Vehicle.

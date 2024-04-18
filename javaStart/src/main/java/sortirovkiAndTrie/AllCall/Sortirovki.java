@@ -7,7 +7,7 @@ public class Sortirovki {
 //        for (int i = 0; i < arr.length; i++) {
 //            arr[i] = sc.nextInt();
 //        }
-        int[] arry = new int[]{1,2,5,50,100,50};
+        int[] arry = new int[]{1,2,5,100,50};
 //        bubleSort(arr);
 //        viborSort(arr);
 //        vstakaSort(arr);

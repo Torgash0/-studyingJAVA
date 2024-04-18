@@ -1,0 +1,138 @@
+Принципы SOLID представляют собой набор пяти основных принципов объектно-ориентированного дизайна, которые помогают
+создавать гибкие, расширяемые и поддерживаемые программные системы. Давайте рассмотрим каждый из этих принципов и приведем
+примеры их применения на языке Java:
+
+Принцип единственной ответственности (Single Responsibility Principle, SRP):
+Этот принцип утверждает, что каждый класс должен иметь только одну причину для изменения. Класс должен быть ответственным
+только за один аспект функциональности.
+
+Пример:
+
+java
+Copy code
+class FileManager {
+    public void readFile(String fileName) { ... }
+    public void writeFile(String fileName) { ... }
+    public void deleteFile(String fileName) { ... }
+}
+Здесь FileManager имеет одну ответственность - управление файлами.
+
+Принцип открытости/закрытости (Open/Closed Principle, OCP):
+Принцип утверждает, что классы должны быть открыты для расширения, но закрыты для модификации. Это означает, что изменения
+в поведении класса должны осуществляться без изменения его исходного кода.
+
+Пример:
+
+java
+Copy code
+interface Shape {
+    double calculateArea();
+}
+
+class Circle implements Shape {
+    private double radius;
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+    public double calculateArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+class Rectangle implements Shape {
+    private double width;
+    private double height;
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+    public double calculateArea() {
+        return width * height;
+    }
+}
+Здесь, если нужно добавить новую фигуру, достаточно создать новый класс, реализующий интерфейс Shape, не изменяя существующий код.
+
+Принцип подстановки Барбары Лисков (Liskov Substitution Principle, LSP):
+Принцип утверждает, что объекты в программе могут быть заменены экземплярами их подтипов без изменения правильности выполнения программы.
+
+Пример:
+
+java
+Copy code
+class Rectangle {
+    protected int width;
+    protected int height;
+    public void setWidth(int width) { ... }
+    public void setHeight(int height) { ... }
+    public int calculateArea() {
+        return width * height;
+    }
+}
+
+class Square extends Rectangle {
+    public void setWidth(int width) {
+        this.width = width;
+        this.height = width;
+    }
+    public void setHeight(int height) {
+        this.width = height;
+        this.height = height;
+    }
+}
+Здесь Square является подтипом Rectangle, но изменение поведения методов setWidth и setHeight в Square нарушает принцип LSP.
+
+Принцип разделения интерфейса (Interface Segregation Principle, ISP):
+Принцип утверждает, что интерфейсы должны быть специфичны для клиентов, которые их используют. Клиенты не должны зависеть
+от интерфейсов, которые они не используют.
+
+Пример:
+
+java
+Copy code
+interface Worker {
+    void work();
+    void eat();
+}
+
+class Robot implements Worker {
+    public void work() { ... }
+    public void eat() { } // Некорректно для робота
+}
+
+class Human implements Worker {
+    public void work() { ... }
+    public void eat() { ... }
+}
+В этом примере класс Robot не нуждается в методе eat(), что нарушает принцип ISP.
+
+Принцип инверсии зависимостей (Dependency Inversion Principle, DIP):
+Принцип утверждает, что модули верхнего уровня не должны зависеть от модулей нижнего уровня. Оба должны зависеть от
+абстракций. Кроме того, абстракции не должны зависеть от деталей, но детали должны зависеть от абстракций.
+
+Пример:
+
+java
+Copy code
+interface MessageSender {
+    void sendMessage(String message);
+}
+
+class EmailSender implements MessageSender {
+    public void sendMessage(String message) { ... }
+}
+
+class SMSSender implements MessageSender {
+    public void sendMessage(String message) { ... }
+}
+
+class Notification {
+    private MessageSender sender;
+    public Notification(MessageSender sender) {
+        this.sender = sender;
+    }
+    public void send(String message) {
+        sender.sendMessage(message);
+    }
+}
+Класс Notification зависит от интерфейса MessageSender, а не от конкретных реализаций, что позволяет легко заменять
+отправителей сообщений.
